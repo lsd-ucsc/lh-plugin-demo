@@ -1,3 +1,5 @@
+-- This is how you can turn on LH options at the file level. These options can
+-- also be turned on at the project level in package.yaml or your cabalfile.
 {-@ LIQUID "--reflection"     @-}
 {-@ LIQUID "--ple"            @-}
 {-@ LIQUID "--no-termination" @-}

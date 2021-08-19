@@ -1,0 +1,37 @@
+name: lh-plugin-demo
+
+# versions aren't specified here because they're determined in stack.yaml
+dependencies:
+# - base # we don't depend on base! instead, we depend on liquid-base below
+  - liquidhaskell
+  # the rest of this list matches exactly the list in stack.yaml
+  - liquid-base
+  - liquid-bytestring
+  - liquid-containers
+  - liquid-fixpoint
+  - liquid-ghc-prim
+  - liquid-parallel
+# - liquid-platform # not a library
+  - liquid-prelude
+  - liquid-vector
+
+ghc-options:
+  - -fno-warn-incomplete-patterns # liquidhaskell aready does this for us
+  - -fplugin=LiquidHaskell
+  # these options enable LH features and aren't required. You can also choose
+  # to enable these options at the level of individual files. See
+  # lib/Demo/Client.hs for an example.
+  - -fplugin-opt=LiquidHaskell:--exact-data # fix an error where a function that matched a `[]` pattern had "Unbound symbol is$GHC.Types[]"
+  - -fplugin-opt=LiquidHaskell:--exact-data-cons # make reflect able to handle functions with custom data structures
+  - -fplugin-opt=LiquidHaskell:--no-adt # required for partial constructors
+  - -fplugin-opt=LiquidHaskell:--ple-local # enable PLE where explicitly turned on
+  - -fplugin-opt=LiquidHaskell:--reflection # fix an error where a function taking a function-argument had an "Unbound symbol"; also necessary for extrinsic properties
+
+library:
+  source-dirs: lib
+
+executables:
+  demo: # name of the output file
+      main: Main.hs
+      dependencies:
+        - lh-plugin-demo # depend on this project to import the library modules

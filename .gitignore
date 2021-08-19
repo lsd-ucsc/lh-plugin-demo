@@ -30,6 +30,7 @@ _build
 *~
 *.swp
 *.swo
+*.cabal
 dist-newstyle
 .cabal-sandbox/
 cabal.sandbox.config
