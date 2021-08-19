@@ -15,5 +15,5 @@ extra-deps:
       - liquid-prelude
       - liquid-vector
 nix:
-  enable: true
+  enable: false # enable this if you have nix available
   packages: [ z3 ]
